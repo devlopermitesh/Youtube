@@ -3,10 +3,12 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { UserCircleIcon } from "lucide-react";
 
 const AuthButton=()=>{
+    
 return(
     <>
     <SignedIn>
         <UserButton/>
+        {/* to add menu items */}
     </SignedIn>
     <SignedOut>
         <SignInButton mode="modal">

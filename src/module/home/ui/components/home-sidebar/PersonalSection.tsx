@@ -8,10 +8,13 @@ import {
 import Link from "next/link";
 import { getIconComponent } from "@/lib/iconMapper";
 import usePersonalRoutes from "./PersonalRoute";
+import { useClerk } from "@clerk/nextjs";
+import { useAuth } from "@clerk/clerk-react";
 
 export const PersonalSection = () => {
   const routes = usePersonalRoutes();
-
+  const clerk=useClerk();
+  const {isSignedIn}=useAuth();
   return (
     <SidebarGroup>
       <SidebarGroupContent>
@@ -31,6 +34,12 @@ export const PersonalSection = () => {
                       ? "bg-muted text-primary"
                       : "hover:bg-muted text-muted-foreground"
                   }`}
+                   onClick={(e)=>{
+                    if(!isSignedIn && route.auth){
+                       e.preventDefault();
+                      return clerk.openSignIn();
+                    }
+                  }}
                 >
                   <Link href={route.url} className="flex items-center gap-4 w-full">
                             <Icon className="!w-6 !h-6" />

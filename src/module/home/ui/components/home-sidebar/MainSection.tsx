@@ -8,10 +8,12 @@ import {
 import useRoutes from "./SidebarRoutes";
 import Link from "next/link";
 import { getIconComponent } from "@/lib/iconMapper";
+import { useAuth, useClerk } from "@clerk/nextjs";
 
 export const MainSection = () => {
   const routes = useRoutes();
-
+  const clerk=useClerk();
+  const {isSignedIn}=useAuth();
   return (
     <SidebarGroup>
       <SidebarGroupContent>
@@ -25,6 +27,12 @@ export const MainSection = () => {
                   tooltip={route.title}
                   asChild
                   isActive={route.is_Active}
+                  onClick={(e)=>{
+                    if(!isSignedIn && route.auth){
+                       e.preventDefault();
+                      return clerk.openSignIn();
+                    }
+                  }}
                   className={`w-full px-3 py-2 rounded-lg flex items-center gap-4 text-sm font-medium transition-all
                   ${
                     route.is_Active
