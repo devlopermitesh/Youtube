@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { SignedIn, SignedOut, SignInButton, SignOutButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { UserCircleIcon } from "lucide-react";
 
 const AuthButton=()=>{
