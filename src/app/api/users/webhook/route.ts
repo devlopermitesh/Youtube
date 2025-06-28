@@ -1,10 +1,17 @@
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
 import { verifyWebhook } from "@clerk/nextjs/webhooks";
-import { WebhookEvent } from "@clerk/backend";
+import { WebhookEvent } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { NextRequest } from "next/server";
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+  runtime: "edge",
+};
 
+export const dynamic = "force-dynamic";
 export async function POST(req: NextRequest) {
   const secret = process.env.CLERK_WEBHOOK_SIGNING_SECRET;
 
