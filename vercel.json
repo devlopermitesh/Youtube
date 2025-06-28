@@ -1,4 +1,9 @@
 {
-  "buildCommand": "bun run build",
-  "installCommand": "bun install"
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  },
+  "installCommand": "npm install",
+  "buildCommand": "npm run build"
 }
