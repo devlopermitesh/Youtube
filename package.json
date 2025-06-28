@@ -10,7 +10,7 @@
     "lint": "bunx eslint . --ext .ts,.tsx",
     "format": "bunx prettier --write .",
     "check-format": "bunx prettier --check .",
-    "prepare": "husky install",
+    "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky install; fi",
     "test": "bun run lint && bun run check-format",
     "type-check": "tsc --noEmit"
   },
