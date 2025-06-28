@@ -16,7 +16,7 @@ const useRoutes = (): RouteItem[] => {
 
   const routes = useMemo((): RouteItem[] => {
     return [
-    {
+      {
         title: "Home",
         url: "/",
         icon: "home",

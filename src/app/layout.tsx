@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import {ClerkProvider} from '@clerk/nextjs'
+import { ClerkProvider } from "@clerk/nextjs";
 export const metadata: Metadata = {
   title: "Youtube",
   description: "Youtube for uploading video",
@@ -14,12 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-        <ClerkProvider afterSignOutUrl={"/"}>
+    <ClerkProvider afterSignOutUrl={"/"}>
       <html lang="en">
-      <body className={inter.className}>
-        {children}
-      </body>
-    </html>
+        <body className={inter.className}>{children}</body>
+      </html>
     </ClerkProvider>
   );
 }

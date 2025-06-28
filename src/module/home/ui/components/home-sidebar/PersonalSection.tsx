@@ -13,8 +13,8 @@ import { useAuth } from "@clerk/clerk-react";
 
 export const PersonalSection = () => {
   const routes = usePersonalRoutes();
-  const clerk=useClerk();
-  const {isSignedIn}=useAuth();
+  const clerk = useClerk();
+  const { isSignedIn } = useAuth();
   return (
     <SidebarGroup>
       <SidebarGroupContent>
@@ -34,15 +34,18 @@ export const PersonalSection = () => {
                       ? "bg-muted text-primary"
                       : "hover:bg-muted text-muted-foreground"
                   }`}
-                   onClick={(e)=>{
-                    if(!isSignedIn && route.auth){
-                       e.preventDefault();
+                  onClick={(e) => {
+                    if (!isSignedIn && route.auth) {
+                      e.preventDefault();
                       return clerk.openSignIn();
                     }
                   }}
                 >
-                  <Link href={route.url} className="flex items-center gap-4 w-full">
-                            <Icon className="!w-6 !h-6" />
+                  <Link
+                    href={route.url}
+                    className="flex items-center gap-4 w-full"
+                  >
+                    <Icon className="!w-6 !h-6" />
                     <span>{route.title}</span>
                   </Link>
                 </SidebarMenuButton>

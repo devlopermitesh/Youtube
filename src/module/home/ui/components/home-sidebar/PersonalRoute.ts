@@ -49,14 +49,20 @@ const usePersonalRoutes = (): RouteItem[] => {
         url: "/playlist?list=WL",
         icon: "clock4",
         auth: true,
-        is_Active: pathname === "/playlist" && typeof window !== "undefined" && window.location.search.includes("list=WL"),
+        is_Active:
+          pathname === "/playlist" &&
+          typeof window !== "undefined" &&
+          window.location.search.includes("list=WL"),
       },
       {
         title: "Liked Videos",
         url: "/playlist?list=LL",
         icon: "thumbsUp",
         auth: true,
-        is_Active: pathname === "/playlist" && typeof window !== "undefined" && window.location.search.includes("list=LL"),
+        is_Active:
+          pathname === "/playlist" &&
+          typeof window !== "undefined" &&
+          window.location.search.includes("list=LL"),
       },
       {
         title: "Downloads",
