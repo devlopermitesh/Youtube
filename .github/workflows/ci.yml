@@ -1,0 +1,36 @@
+# 📁 .github/workflows/ci.yml
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🧰 Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: 📦 Install dependencies
+        run: bun install
+
+      - name: 🧹 Lint check
+        run: bun run lint
+
+      - name: 🎨 Format check
+        run: bun run check-format
+
+      - name: 🧪 Type check
+        run: bun run type-check
+
+      - name: 🚀 Build project
+        run: bun run build
