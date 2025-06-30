@@ -15,22 +15,23 @@ jobs:
       - name: 📥 Checkout Code
         uses: actions/checkout@v4
 
-      - name: 🧰 Setup Bun
-        uses: oven-sh/setup-bun@v1
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          bun-version: latest
+          node-version: "18"
+          cache: "npm"
 
       - name: 📦 Install dependencies
-        run: bun install
+        run: npm ci
 
       - name: 🧹 Lint check
-        run: bun run lint
+        run: npm run lint
 
       - name: 🎨 Format check
-        run: bun run check-format
+        run: npm run check-format
 
       - name: 🧪 Type check
-        run: bun run type-check
+        run: npm run type-check
 
       - name: 🚀 Build project
-        run: bun run build
+        run: npm run build
