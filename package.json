@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "bunx eslint . --ext .ts,.tsx",
+    "clilint": "npx eslint . --ext .ts,.tsx",
     "format": "bunx prettier --write .",
     "check-format": "bunx prettier --check .",
     "prepare": "node -e \"if (process.env.NODE_ENV !== 'production') require('child_process').execSync('npx husky install', { stdio: 'inherit' })\"",

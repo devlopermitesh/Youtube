@@ -4,7 +4,8 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
 
 jobs:
@@ -12,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout Code
+      - name: 📥 Checkout code
         uses: actions/checkout@v4
 
       - name: ⚙️ Setup Node.js
@@ -21,14 +22,22 @@ jobs:
           node-version: "20"
           cache: "npm"
 
+      - name: 💾 Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: 📦 Install dependencies
         run: npm ci
 
       - name: 🧹 Lint check
-        run: npm run lint
+        run: npx eslint . --ext .ts,.tsx
 
       - name: 🎨 Format check
-        run: npm run check-format
+        run: npx prettier --check .
 
       - name: 🧪 Type check
         run: npm run type-check
