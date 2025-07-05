@@ -1,8 +1,18 @@
-"use client";
-import { api } from "@/utils/trpc";
-export default function Home() {
-  const { data } = api.hello.getHello.useQuery();
+import { HomeView } from "@/module/home/ui/views/home-view";
+import { HydrateClient, trpc } from "@/trpc/server";
 
-  console.log("data ", data);
-  return <h2 className="text-pink-500 text-2xl font-bold">{data}</h2>;
+interface PageProps{
+  searchParams:Promise<{ categoryId:string}>
 }
+const Page=async({searchParams}:PageProps)=> {
+  void trpc.category.getMany.prefetch()
+ const {categoryId}=await searchParams;
+  return (
+    <HydrateClient>
+       <HomeView categoryId={categoryId}/>
+    </HydrateClient>
+  );
+}
+
+
+export default Page;

@@ -1,8 +1,8 @@
 "use client";
 import { HomeLayout } from "@/module/home/ui/layout/home-layout";
-import { api } from "@/utils/trpc";
+import { TRPCProvider } from "@/trpc/client";
+import { trpc } from "@/trpc/server";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { httpBatchLink } from "@trpc/client";
 import React, { ReactNode, useState } from "react";
 
 interface HomeLayoutProps {
@@ -11,22 +11,16 @@ interface HomeLayoutProps {
 
 const Layout: React.FC<HomeLayoutProps> = ({ children }) => {
   const [queryClient] = useState(() => new QueryClient());
-  const [trpcClient] = useState(() =>
-    api.createClient({
-      links: [
-        httpBatchLink({
-          url: "/api/trpc",
-        }),
-      ],
-    }),
-  );
+
   return (
     <>
-      <api.Provider client={trpcClient} queryClient={queryClient}>
-        <QueryClientProvider client={queryClient}>
-          <HomeLayout>{children}</HomeLayout>
-        </QueryClientProvider>
-      </api.Provider>
+      <QueryClientProvider client={queryClient}>
+        <HomeLayout>
+          <TRPCProvider>
+{children}
+          </TRPCProvider>
+          </HomeLayout>
+      </QueryClientProvider>
     </>
   );
 };

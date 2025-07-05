@@ -1,7 +1,6 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import Image from "next/image";
 import Link from "next/link";
-import YoutubeIcon from "@/../public/social-06-512.svg";
 import SearchBar from "./SearchBar";
 import MicButton from "./mic-button";
 import AuthButton from "@/module/auth/ui/components/auth-button";
@@ -14,7 +13,7 @@ const HomeNavbar = () => {
         <SidebarTrigger />
         <Link href={"/"}>
           <div className="flex items-center gap-2">
-            <Image src={YoutubeIcon} alt="Logo" height={20} width={40} />
+            <Image src="/social-06-512.svg" alt="Logo" height={20} width={40} />
             <p className="text-xl font-semibold tracking-tight">YouTube</p>
           </div>
         </Link>
