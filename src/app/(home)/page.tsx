@@ -1,6 +1,18 @@
-"use client";
-export default function Home() {
+import { HomeView } from "@/module/home/ui/views/home-view";
+import { HydrateClient, trpc } from "@/trpc/server";
+
+interface PageProps{
+  searchParams:Promise<{ categoryId:string}>
+}
+const Page=async({searchParams}:PageProps)=> {
+  void trpc.category.getMany.prefetch()
+ const {categoryId}=await searchParams;
   return (
-    <h2 className="text-pink-500 text-2xl font-bold">Hello world this is </h2>
+    <HydrateClient>
+       <HomeView categoryId={categoryId}/>
+    </HydrateClient>
   );
 }
+
+
+export default Page;
